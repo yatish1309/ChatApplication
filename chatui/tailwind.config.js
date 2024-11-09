@@ -1,3 +1,5 @@
+const { sidebarColor, newChatColor } = require('./constants/AppColors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -10,6 +12,8 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        sidebarColor,
+        newChatColor
       },
     },
   },

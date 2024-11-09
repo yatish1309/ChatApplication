@@ -19,3 +19,13 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.hideScrollBar::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.hideScrollBarIE {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
