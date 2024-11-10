@@ -7,7 +7,7 @@ import deleteIcon from '../../public/delete.svg'
 import { addChat, create, createNewChat } from '../../constants/AppConstants';
 import Portal from '../../Portal/Portal';
 
-const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleChatDeletion }) => {
+const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleChatDeletion, selectedId, handleSelectedId }) => {
   const [showAddChat, setShowAddChat] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const handleAddChatClick = () => {
@@ -21,8 +21,12 @@ const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleC
   const handleAddChat = () => {
     setIsDisabled(!isDisabled);
   }
+  const handleChatClick = (id) => {
+    handleSelectedId(id);
+  }
 
-  const handleDelete = (index) => {
+  const handleDelete = (index, e) => {
+    e.stopPropagation();
     const curChats = [...chats];
     const curSequence = [...chatSequence];
     const chatPart1 = curChats.slice(0, index);
@@ -31,18 +35,18 @@ const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleC
     const chatSeq2 = curSequence.slice(index + 1, chats.length);
     const newChats = chatPart1.concat(chatPart2);
     const newChatSeq = chatSeq1.concat(chatSeq2);
-    handleChatDeletion(newChats, newChatSeq);
+    handleChatDeletion(newChats, newChatSeq, index);
   }
 
   const handleCreate = () => {
     handleChats();
-    handleChatSequence([], chats.length);
+    handleChatSequence([], true);
     setIsDisabled(true);
     setShowAddChat(false);
   }
   return (
     <>
-      <div className='flex flex-col p-3 w-1/4 h-screen overflow-scroll gap-4 hideScrollBar'>
+      <div className='flex flex-col p-3 w-[20%] h-screen overflow-scroll gap-4 hideScrollBar'>
         <div className='flex justify-around items-center w-full bg-sidebarColor'>
           <span className='text-sm'>{addChat}</span>
           <img
@@ -54,15 +58,16 @@ const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleC
         {
           chats?.map((chat, index) => {
             return (
-              <div className='flex justify-around items-center w-full bg-newChatColor p-2'
+              <div className={`flex justify-around items-center w-full ${selectedId === index ? 'bg-green-400' : 'bg-newChatColor'} p-2 cursor-pointer`}
                 key={index}
+                onClick={() => handleChatClick(index)}
               >
                 <span className='text-sm text-black'>{chat}</span>
                 <img
                   src={deleteIcon.src}
                   alt='delete'
                   className='cursor-pointer'
-                  onClick={() => handleDelete(index)}
+                  onClick={(e) => handleDelete(index, e)}
                 />
               </div>
             );
