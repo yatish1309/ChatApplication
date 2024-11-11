@@ -4,7 +4,8 @@ const TextArea = ({
   classString,
   inputString,
   handleInputString,
-  handleKeyDown
+  handleKeyDown,
+  disabled
 }) => {
   const textAreaRef = useRef(null);
   const [maxTextAreaHeight, setMaxTextAreaHeight] = useState(0);
@@ -37,6 +38,7 @@ const TextArea = ({
       className={classString}
       autoFocus={true}
       rows={rows}
+      disabled={disabled}
       value={inputString}
       onChange={handleInputString}
       onKeyDown={handleKeyDown}

@@ -3,6 +3,7 @@ import ChatMessage from '../chatMessage/ChatMessage';
 
 const MessageBox = ({ chatMessageList, handleDelete }) => {
   const messagesRef = useRef(null);
+
   useEffect(() => {
     if (chatMessageList.length) {
       messagesRef.current?.scrollIntoView({
@@ -12,6 +13,7 @@ const MessageBox = ({ chatMessageList, handleDelete }) => {
     }
 
   }, [chatMessageList.length]);
+
   return (
     <>
       <div className='flex flex-col gap-4 items-center w-full pt-15 h-[90%] overflow-scroll hideScrollBar'>
@@ -19,7 +21,9 @@ const MessageBox = ({ chatMessageList, handleDelete }) => {
           chatMessageList?.map((message, index) => {
             return (
               <ChatMessage
-                message={message}
+                message={message.msg}
+                date={message.date}
+                type={message.type}
                 handleDelete={handleDelete}
                 index={index}
                 key={index}

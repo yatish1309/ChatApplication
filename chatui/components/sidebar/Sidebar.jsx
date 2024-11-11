@@ -4,12 +4,21 @@ import plus from '../../public/plusIcon.svg'
 import messages from '../../public/messages.svg'
 import deleteIcon from '../../public/delete.svg'
 
-import { addChat, create, createNewChat } from '../../constants/AppConstants';
+import { addChat, add, create, createNewChat } from '../../constants/AppConstants';
 import Portal from '../../Portal/Portal';
 
-const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleChatDeletion, selectedId, handleSelectedId }) => {
+const Sidebar = ({
+  chats,
+  handleChats,
+  chatSequence,
+  handleChatSequence,
+  handleChatDeletion,
+  selectedId,
+  handleSelectedId
+}) => {
   const [showAddChat, setShowAddChat] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+
   const handleAddChatClick = () => {
     setShowAddChat(true);
   }
@@ -46,13 +55,14 @@ const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleC
   }
   return (
     <>
-      <div className='flex flex-col p-3 w-[20%] h-screen overflow-scroll gap-4 hideScrollBar'>
-        <div className='flex justify-around items-center w-full bg-sidebarColor'>
-          <span className='text-sm'>{addChat}</span>
+      <div className='flex flex-col p-3 w-[30%] lg:w-[20%] h-screen overflow-scroll gap-4 hideScrollBar'>
+        <div className='flex justify-around items-center w-full bg-sidebarColor p-2'>
+          <span className='text-sm hidden md:block'>{addChat}</span>
+          <span className='text-sm md:hidden'>{add}</span>
           <img
             src={plus.src}
             alt='plus'
-            className='cursor-pointer'
+            className='cursor-pointer w-4 h-4 md:w-8 md:h-8'
             onClick={handleAddChatClick} />
         </div>
         {
@@ -62,11 +72,11 @@ const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleC
                 key={index}
                 onClick={() => handleChatClick(index)}
               >
-                <span className='text-sm text-black'>{chat}</span>
+                <span className='text-xs md:text-sm text-black'>{chat}</span>
                 <img
                   src={deleteIcon.src}
                   alt='delete'
-                  className='cursor-pointer'
+                  className='cursor-pointer w-4 h-4 md:w-8 md:h-8'
                   onClick={(e) => handleDelete(index, e)}
                 />
               </div>
@@ -82,7 +92,7 @@ const Sidebar = ({ chats, handleChats, chatSequence, handleChatSequence, handleC
           >
             <div className='w-full h-full flex items-center justify-center' >
               <div
-                className='flex flex-col gap-4 justify-center items-center w-[16rem] h-[14rem] border border-solid border-gray-500 '
+                className='flex flex-col gap-4 justify-center items-center w-[16rem] h-[14rem] border border-solid border-gray-500 bg-black'
                 onClick={(e) => {
                   e.stopPropagation();
                 }}>
