@@ -13,7 +13,6 @@ const ChatPage = () => {
   }
   const handleChatSequenceUpdation = (newChatSequence, newlycreate = false) => {
     const curSequence = [...chatSequence];
-    console.log(curSequence, selectedChatId)
     if (newlycreate) {
       curSequence.push(newChatSequence);
       setSelectedChatId(curSequence.length - 1);
@@ -29,8 +28,6 @@ const ChatPage = () => {
 
   const handleSelectedId = (id) => {
     setSelectedChatId(id);
-    console.log(id)
-    console.log(chatSequence)
   }
 
   const handleChatDeletion = (newChats, newChatSeq, id) => {
