@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import ChatWindow from '../chatWindow/ChatWindow'
 
+//The main page start here it has 2 parts sideBar and ChatWindow
 const ChatPage = () => {
   const [chats, setChats] = useState([]);
   const [chatSequence, setChatSequence] = useState([]);

@@ -7,6 +7,7 @@ import deleteIcon from '../../public/delete.svg'
 import { addChat, add, create, createNewChat } from '../../constants/AppConstants';
 import Portal from '../../Portal/Portal';
 
+//portal used here is a popup
 const Sidebar = ({
   chats,
   handleChats,
@@ -38,12 +39,8 @@ const Sidebar = ({
     e.stopPropagation();
     const curChats = [...chats];
     const curSequence = [...chatSequence];
-    const chatPart1 = curChats.slice(0, index);
-    const chatPart2 = curChats.slice(index + 1, chats.length);
-    const chatSeq1 = curSequence.slice(0, index);
-    const chatSeq2 = curSequence.slice(index + 1, chats.length);
-    const newChats = chatPart1.concat(chatPart2);
-    const newChatSeq = chatSeq1.concat(chatSeq2);
+    const newChats = curChats.filter((chat, id) => index !== id);
+    const newChatSeq = curSequence.filter((chat, id) => index !== id);
     handleChatDeletion(newChats, newChatSeq, index);
   }
 

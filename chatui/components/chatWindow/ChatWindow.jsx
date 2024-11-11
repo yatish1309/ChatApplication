@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import MessageBox from '../messageBox/MessageBox'
 import TextArea from '../TextArea'
@@ -11,6 +12,8 @@ const ChatWindow = ({ chatSequence, handleChatSequence, selectedId }) => {
   useEffect(() => {
     setInputString('');
   }, [selectedId])
+
+  //This useEffect is used to give a mock  Response.
 
   useEffect(() => {
     if (messageSent) {
@@ -26,17 +29,21 @@ const ChatWindow = ({ chatSequence, handleChatSequence, selectedId }) => {
     }
   }, [messageSent])
 
-  const handleQuery = () => {
-    const curSelected = chatSequence[selectedId];
-    const curMessageList = [...curSelected];
-    curMessageList.push({
-      msg: inputString,
-      date: new Date(),
-      type: USER
-    });
-    handleChatSequence(curMessageList);
+
+  const handleSend = () => {
+    const str = inputString;
+    if (str.trim()) {
+      const curSelected = chatSequence[selectedId];
+      const curMessageList = [...curSelected];
+      curMessageList.push({
+        msg: inputString,
+        date: new Date(),
+        type: USER
+      });
+      handleChatSequence(curMessageList);
+      setMessageSent(true);
+    }
     setInputString('');
-    setMessageSent(true);
   }
 
   const handleInputString = (e) => {
@@ -45,10 +52,13 @@ const ChatWindow = ({ chatSequence, handleChatSequence, selectedId }) => {
   };
 
   const handleInputKeyDown = (e) => {
+    const str = inputString;
     if (e.key === 'Enter' && !e.shiftKey) {
-      handleQuery();
+      if (str.trim()) {
+        handleSend();
+        setMessageSent(true);
+      }
       setInputString('');
-      setMessageSent(true);
       e.preventDefault();
     }
   };
@@ -81,7 +91,7 @@ const ChatWindow = ({ chatSequence, handleChatSequence, selectedId }) => {
               src={send.src}
               alt='send'
               className='cursor-pointer'
-              onClick={handleQuery}
+              onClick={handleSend}
             />
 
           </div>
