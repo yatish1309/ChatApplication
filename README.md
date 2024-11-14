@@ -1,7 +1,7 @@
 
 # Project Title
 
-A Simple Chat Application where user have multiple chats with different people and the user can type the message and send it in the chat in order to get a response.
+A Simple Chat Application where user have multiple chats with different people and the user can type the message and send it in the chat in order to get a response. Key features like scroll into view when messages get to the end, onkeydown "Enter" functionality on input, input expands when more words are entered.
 
 # Instructions to Run
 
